@@ -1,0 +1,28 @@
+# vim ft=sh
+
+function it() {
+  local testdesc="$1"
+  local testbody="$(cat)"
+  printf $testdesc
+  run="set -x; eval '$testbody'"
+  out="$(sh -c "$run" 2>&1 )" # TODO set shell
+  if [ "$?" != 0 ]; then
+    printf "\t Fail\n"
+    echo "$out"
+  else
+    printf "\t Succeed\n"
+  fi
+}
+
+
+it "fails" <<-T
+	cat /etc/passwd | grep elvis
+T
+
+it "succeeds" <<-T
+	ls / | grep tmp
+T
+
+it "creates" <<-T
+	touch testfile
+T
