@@ -1,4 +1,5 @@
-# vim ft=sh
+#!/bin/bash
+# vim: set ft=sh:
 
 function it() {
   local testdesc="$1"
@@ -24,5 +25,6 @@ it "succeeds" <<-T
 T
 
 it "creates" <<-T
-	touch testfile
+	touch testfile | ls testfile
 T
+
