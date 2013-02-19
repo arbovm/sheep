@@ -1,20 +1,7 @@
 #!/bin/bash
 # vim: set ft=sh:
 
-function it() {
-  local testdesc="$1"
-  local testbody="$(cat)"
-  printf $testdesc
-  run="set -x; eval '$testbody'"
-  out="$(sh -c "$run" 2>&1 )" # TODO set shell
-  if [ "$?" != 0 ]; then
-    printf "\t Fail\n"
-    echo "$out"
-  else
-    printf "\t Succeed\n"
-  fi
-}
-
+source ./sheep.sh
 
 it "fails" <<-T
 	cat /etc/passwd | grep elvis
@@ -28,3 +15,7 @@ it "creates" <<-T
 	touch testfile | ls testfile
 T
 
+AN_ENV_VAR=42
+it "knows environment variables" <<-T
+	echo $AN_ENV_VAR | grep '^42$'
+T
