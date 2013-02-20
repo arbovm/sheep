@@ -1,5 +1,5 @@
 
-SHEEP_INTERPRETER="sh -c"
+SHEEP_INTERPRETER=${SHEEP_INTERPRETER-bash -c}
 
 function it() {
   local testdesc="$@"

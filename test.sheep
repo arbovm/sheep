@@ -3,19 +3,23 @@
 
 source ./sheep.sh
 
-it "fails" <<-T
+it "doesn't find elvis" <<-T
 	cat /etc/passwd | grep elvis
 T
 
-it "succeeds" <<-T
+it "finds /tmp" <<-T
 	ls / | grep tmp
 T
 
-it "creates" <<-T
+it "creates a file" <<-T
 	touch testfile | ls testfile
 T
 
 AN_ENV_VAR=42
 it "knows environment variables" <<-T
 	echo $AN_ENV_VAR | grep '^42$'
+T
+
+it "reads environment variables dynamically" <<-T
+	echo \$AN_ENV_VAR | grep '^42$'
 T
