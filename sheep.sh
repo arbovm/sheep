@@ -14,3 +14,9 @@ function it() {
     printf "\t Succeed\n"
   fi
 }
+
+function xit() {
+  local testdesc="$@"
+  printf "$testdesc\t Ignored\n"
+}
+
