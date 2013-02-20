@@ -3,7 +3,7 @@
 
 source ./sheep.sh
 
-it "doesn't find elvis" <<-T
+it "finds elvis (NOT)" <<-T
 	cat /etc/passwd | grep elvis
 T
 
@@ -20,6 +20,12 @@ it "knows environment variables" <<-T
 	echo $AN_ENV_VAR | grep '^42$'
 T
 
-xit "reads environment variables dynamically" <<-T
+xit "ignores this test" <<-T
+	exit 1
+T
+
+SHEEP_INTERPRETER='eval'
+it "reads environment variables dynamically" <<-T
 	echo \$AN_ENV_VAR | grep '^42$'
 T
+
